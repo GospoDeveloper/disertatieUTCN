@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formular Evaluare</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleFormular.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=GFS+Didot&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- navigation bar menu -->
+    <div id="navbar">
+      <a
+        id="navLogin"
+        sec:authorize="isAuthenticated()"
+        th:href="@{/logout}"
+        >Delogare</a
+      >
+      <a id="navHome" href="/"  th:href="@{/}">Acasă</a>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h1 class="titlu">Formular de evaluare</h1>
+    <!-- formularul de evaluare nutritionala -->
+    <form class="formular-nutritional" method="post" th:object="${formular}" action="#" th:action="@{/trimiteFormular}">
+      <input type="hidden" th:field="*{Id}"/>
+
+      <!-- prima categori date demografice -->
+      <div class="date-demografice">
+        <label class="titlu-subdivizie">Date demografice</label>
+        <div>
+          <label>1. Varsta: </label>
+          <input class="input-text" th:field="*{varsta}" type="number" placeholder="Varsta" min="0" max="100" required />
+        </div>
+        <div>
+          <label>2. Sexul: </label>
+          <label>Masculin</label>
+          <input type="radio" th:field="*{sexul}" name="sexul" value="M" required />
+          <label>Feminin</label>
+          <input type="radio" th:field="*{sexul}" name="sexul" value="F" />
+        </div>
+        <div>
+          <label>3. Domiciliul: </label>
+          <label>Urban</label>
+          <input type="radio" th:field="*{domiciliu}" name="domiciliu" value="U" required/>
+          <label>Rural</label>
+          <input type="radio" th:field="*{domiciliu}" name="domiciliu" value="R"  />
+        </div>
+        <div>
+          <label>4. Ocupatia: </label>
+          <input class="input-text" th:field="*{ocupatia}" type="text" placeholder="ocupatia" required maxlength="20" />
+        </div>
+        <div>
+          <label>5. Greutate(in kg): </label>
+          <input class="input-text" th:field="*{greutate}" type="number" placeholder="greutate" required min="10" max="400"/>
+        </div>
+        <div>
+          <label>6. Inaltime(in cm): </label>
+          <input class="input-text" th:field="*{inaltime}" type="number" placeholder="inaltime" required min="50" max="300"/>
+        </div>
+      </div>
+      <!-- date despre diagnostic -->
+      <div class="date-diagnostic">
+        <label class="titlu-subdivizie">Date diagnostic si antecedente</label>
+        <div>
+          <label>7. Unde este localizat calculul? </label>
+          <br />
+          <label>Rinichi</label>
+          <input type="radio" name="localizare" th:field="*{localizare}" value="rinichi" required />
+          <label>Canal ureteral </label>
+          <input type="radio" name="localizare" th:field="*{localizare}" value="canal ureteral"/>
+          <label>Vezica urinara </label>
+          <input type="radio" name="localizare" th:field="*{localizare}" value="vezica urinara"/>
+        </div>
+        <div>
+          <label
+            >8. Ati mai avut calculi urinari pana la momentul internarii?</label
+          >
+          <br />
+          <label>Da</label>
+          <input type="radio" name="antecedenteCalculi" th:field="*{antecedenteCalculi}" value="da" required/>
+          <label>Nu</label>
+          <input type="radio" name="antecedenteCalculi" th:field="*{antecedenteCalculi}" value="nu" />
+        </div>
+        <div>
+          <label>9. Ati avut infectie urinara in momentul internarii?</label>
+          <br />
+          <label>Da</label>
+          <input type="radio" name="antecedenteInfectie" th:field="*{antecedenteInfectie}" value="da" required />
+          <label>Nu</label>
+          <input type="radio" name="antecedenteInfectie" th:field="*{antecedenteInfectie}" value="nu" />
+        </div>
+        <div>
+          <label
+            >10. Ati mai fost operat de calculi pana in momentul
+            internarii?</label
+          >
+          <br />
+          <label>Da</label>
+          <input type="radio" name="antecedenteOperatie" th:field="*{antecedenteOperatie}" value="da" required />
+          <label>Nu</label>
+          <input type="radio" name="antecedenteOperatie" th:field="*{antecedenteOperatie}" value="nu" />
+          <br />
+          <label>Precizati prin ce metoda:</label>
+          <br />
+          <label>Nu am fost operat</label>
+          <input type="radio" name="tipOperatieAntecedente" th:field="*{tipOperatieAntecedente}" value="nu" />
+          <label>Clasic</label>
+          <input type="radio" name="tipOperatieAntecedente" th:field="*{tipOperatieAntecedente}" value="clasic" required />
+          <label>Endoscopic</label>
+          <input
+            type="radio"
+            name="tipOperatieAntecedente"
+            th:field="*{tipOperatieAntecedente}"
+            value="endoscopic"
+          />
+          <label>Laparoscopic</label>
+          <input
+            type="radio"
+            name="tipOperatieAntecedente"
+            th:field="*{tipOperatieAntecedente}"
+            value="laparoscopic"
+          />
+        </div>
+        <div>
+          <label>11. Cand ati avut primul episod de litiaza?</label>
+          <input
+            class="input-text"
+            type="date"
+            name="primulEpisodLitiaza"
+            th:field="*{primulEpisodLitiaza}" required
+          />
+        </div>
+        <div>
+          <label>12. Cand a fost descoperit calculul actual?</label>
+          <input
+            class="input-text"
+            type="date"
+            name="episodActual"
+            placeholder="zi/luna/an" required
+          />
+        </div>
+        <div>
+          <label>13. Aveti in familie persoane care sufera de litiaza?</label>
+          <br />
+          <label>Da</label>
+          <input type="radio" name="antecedenteHeredocolaterale" th:field="*{antecedenteHeredocolaterale}" value="Da" required />
+          <label>Nu</label>
+          <input type="radio" name="antecedenteHeredocolaterale" th:field="*{antecedenteHeredocolaterale}" value="Nu" />
+          <br />
+          <label>Precizati gradul de rudenie: </label>
+          <br /><label>Nu am</label>
+          <input type="radio" name="gradRudenie" th:field="*{gradRudenie}" value="Nu" />
+          <label>Parinti</label>
+          <input type="radio" name="gradRudenie" th:field="*{gradRudenie}" value="Parinti" />
+          <label>Frati</label>
+          <input type="radio" name="gradRudenie" th:field="*{gradRudenie}" value="Frati" />
+          <label>Surori</label>
+          <input type="radio" name="gradRudenie" th:field="*{gradRudenie}" value="Surori" />
+        </div>
+        <div>
+          <label
+            >14. In zona in care locuiti mai exista persoane cu aceasta
+            problema?</label
+          >
+          <br />
+          <label>Da</label>
+          <input type="radio" name="prezentaInZona" th:field="*{prezentaInZona}" value="Da" required />
+          <label>Nu</label>
+          <input type="radio" name="prezentaInZona" th:field="*{prezentaInZona}" value="Nu" />
+        </div>
+      </div>
+      <!-- date despre consumul de apa si hidrice -->
+      <div class="date-consum-apa">
+        <label class="titlu-subdivizie">Date despre aportul hidric</label>
+        <div>
+          <label
+            >15. Cate cani de apa consumati pe zi? (1 cana = un sfert de
+            litru)</label
+          >
+          <br />
+          <label>1-2 cani</label>
+          <input type="radio" name="cantitateApa" th:field="*{cantitateApa}" value="2" required/>
+          <label>3-4 cani</label>
+          <input type="radio" name="cantitateApa" th:field="*{cantitateApa}" value="4" />
+          <label>4-6 cani</label>
+          <input type="radio" name="cantitateApa" th:field="*{cantitateApa}" value="6" />
+          <label>6-8 cani</label>
+          <input type="radio" name="cantitateApa" th:field="*{cantitateApa}" value="8" />
+        </div>
+        <div>
+          <label>16. De unde provine apa pe care o consumati?</label>
+          <br />
+          <label>Sistemul public</label>
+          <input type="radio" name="sursaApa" th:field="*{sursaApa}" value="sistemul public" required />
+          <label>pompa de apa locala</label>
+          <input type="radio" name="sursaApa" th:field="*{sursaApa}" value="pompa de apa" />
+          <label>fantana</label>
+          <input type="radio" name="sursaApa" th:field="*{sursaApa}" value="fantana" />
+          <label>comert</label>
+          <input type="radio" name="sursaApa" th:field="*{sursaApa}" value="comert" />
+        </div>
+        <div>
+          <label>17. Ce marca de apa consumati cel mai des?</label>
+          <input
+            class="input-text"
+            type="text"
+            th:field="*{marcaApa}"
+            name="marcaApa"
+            placeholder="marca apa"
+            required
+            maxlength="15"
+          />
+        </div>
+        <div>
+          <label>18. Consumati bauturi carbogazoase?</label>
+          <br />
+          <label>Da</label>
+          <input type="radio" name="carbogazoase" th:field="*{carbogazoase}" value="Da" required/>
+          <label>Nu</label>
+          <input type="radio" name="carbogazoase" th:field="*{carbogazoase}" value="Nu" />
+          <br />
+          <label>In ce cantitate?</label>
+          <br />
+          <label> Nu consum</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="0"  />
+          <label> sub 1 L</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="0.5"  />
+          <label>1 L</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="1"  />
+          <label>1,5 L</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="1.5" />
+          <label>2 L</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="2" />
+          <label>mai mult de 2 L</label>
+          <input type="radio" name="cantitateCarbogazoase" th:field="*{cantitateCarbogazoase}" value="3" />
+        </div>
+        <div>
+          <label
+            >19. Consumati sucuri naturale de lamaie sau portocale sau alte
+            citrice?</label
+          >
+          <br />
+          <label>Da</label>
+          <input type="radio" name="consumSucuriNaturale" th:field="*{consumSucuriNaturale}" value="da" required />
+          <label>Nu</label>
+          <input type="radio" name="consumSucuriNaturale" th:field="*{consumSucuriNaturale}" value="nu" />
+          <br /> <label>In ce cantitate?</label>
+          <br>
+          <label>Nu consum</label>
+          <input type="radio" name="cantitateSucuriNaturale" th:field="*{cantitateSucuriNaturale}" value="0" required />
+          <label>sub 100 ml</label>
+          <input type="radio" name="cantitateSucuriNaturale" th:field="*{cantitateSucuriNaturale}" value="100" />
+          <label>100 - 150 ml</label>
+          <input type="radio" name="cantitateSucuriNaturale" th:field="*{cantitateSucuriNaturale}" value="150" />
+          <label>peste 150 ml</label>
+          <input type="radio" name="cantitateSucuriNaturale" th:field="*{cantitateSucuriNaturale}" value="200" />
+        </div>
+        <div>
+          <label>20. Ce cantitate de lapte consumati zilnic?</label>
+          <br />
+          <label>Nu consum</label>
+          <input type="radio" name="cantitateLapte" th:field="*{cantitateLapte}" value="0" required/>
+          <label>Mai putin de 500 ml</label>
+          <input type="radio" name="cantitateLapte" th:field="*{cantitateLapte}" value="400" />
+          <label>500 ml</label>
+          <input type="radio" name="cantitateLapte" th:field="*{cantitateLapte}" value="500" />
+          <label>Mai mult de 500 ml</label>
+          <input type="radio" name="cantitateLapte" th:field="*{cantitateLapte}" value="600" />
+        </div>
+      </div>
+      <!-- date despre alimentatie  -->
+      <div class="date-alimentatie">
+        <label class="titlu-subdivizie">Date despre alimentatie</label>
+        <div>
+          <label>21. De cate ori va alimentati pe zi?</label>
+          <br />
+          <label>1 masa / zi</label>
+          <input type="radio" name="cantitateMese" th:field="*{cantitateMese}" value="1" required />
+          <label>2 mese / zi</label>
+          <input type="radio" name="cantitateMese" th:field="*{cantitateMese}" value="2" />
+          <label>3 mese / zi</label>
+          <input type="radio" name="cantitateMese" th:field="*{cantitateMese}" value="3" />
+          <label> mai mult de 3 mese / zi</label>
+          <input type="radio" name="cantitateMese" th:field="*{cantitateMese}" value="4" />
+        </div>
+        <div>
+          <label>22. Cat de des consumati legume pe saptamana?</label>
+          <br />
+          <label>Zilnic</label>
+          <input type="radio" name="cantitateLegumeSaptamana" th:field="*{cantitateLegumeSaptamana}" value="1" required/>
+          <label>La 2 - 3 zile</label>
+          <input type="radio" name="cantitateLegumeSaptamana" th:field="*{cantitateLegumeSaptamana}" value="2" />
+          <label>Odata pe saptamana</label>
+          <input type="radio" name="cantitateLegumeSaptamana" th:field="*{cantitateLegumeSaptamana}" value="3" />
+          <label>Deloc</label>
+          <input type="radio" name="cantitateLegumeSaptamana" th:field="*{cantitateLegumeSaptamana}" value="4" />
+        </div>
+        <div>
+          <label>23. Precizati cate portii de legume consumati pe zi</label>
+          <br />
+          <label>1 portie</label>
+          <input type="radio" name="cantitateLegumeZi" th:field="*{cantitateLegumeZi}" value="1" required />
+          <label>2 portii</label>
+          <input type="radio" name="cantitateLegumeZi" th:field="*{cantitateLegumeZi}" value="2" />
+          <label>mai mult de 3 portii</label>
+          <input type="radio" name="cantitateLegumeZi" th:field="*{cantitateLegumeZi}" value="3" />
+        </div>
+        <div>
+          <label>24. Cat de des consumati rosii pe saptamana?</label>
+          <br />
+          <label>Zilnic</label>
+          <input type="radio" name="cantitateRosiiSaptamana" th:field="*{cantitateRosiiSaptamana}" value="1" required />
+          <label>La 2 - 3 zile</label>
+          <input type="radio" name="cantitateRosiiSaptamana" th:field="*{cantitateRosiiSaptamana}" value="2" />
+          <label>O data</label>
+          <input type="radio" name="cantitateRosiiSaptamana" th:field="*{cantitateRosiiSaptamana}" value="3" />
+          <label>Deloc</label>
+          <input type="radio" name="cantitateRosiiSaptamana" th:field="*{cantitateRosiiSaptamana}" value="4" />
+        </div>
+        <div>
+          <label>25. Cat de des consumati cartofi pe saptamana?</label>
+          <br />
+          <label>Zilnic</label>
+          <input type="radio" name="cantitateCartofiSaptamana" th:field="*{cantitateCartofiSaptamana}" value="1" required />
+          <label>La 2 - 3 zile</label>
+          <input type="radio" name="cantitateCartofiSaptamana" th:field="*{cantitateCartofiSaptamana}" value="2" />
+          <label>O data</label>
+          <input type="radio" name="cantitateCartofiSaptamana" th:field="*{cantitateCartofiSaptamana}" value="3" />
+          <label>Deloc</label>
+          <input type="radio" name="cantitateCartofiSaptamana" th:field="*{cantitateCartofiSaptamana}" value="4" />
+        </div>
+        <div>
+          <label>26. Cat de des consumati fructe?</label>
+          <br />
+          <label>Zilnic</label>
+          <input type="radio" name="cantitateFructeSaptamana" th:field="*{cantitateFructeSaptamana}" value="1" required />
+          <label>La 2 - 3 zile</label>
+          <input type="radio" name="cantitateFructeSaptamana" th:field="*{cantitateFructeSaptamana}" value="2" />
+          <label>O data</label>
+          <input type="radio" name="cantitateFructeSaptamana" th:field="*{cantitateFructeSaptamana}" value="3" />
+          <label>Deloc</label>
+          <input type="radio" name="cantitateFructeSaptamana" th:field="*{cantitateFructeSaptamana}" value="4" />
+        </div>
+        <div>
+          <label>27. Consumati fructe la micul dejun?</label>
+          <br />
+          <label>Da</label>
+          <input type="radio" name="fructeMicDejun" th:field="*{fructeMicDejun}" value="Da" required />
+          <label>Nu</label>
+          <input type="radio" name="fructeMicDejun" th:field="*{fructeMicDejun}" value="Nu" />
+        </div>
+        <div>
+          <label>28. Cat de des pe saptamana consumati carne?</label>
+          <br />
+          <label>Zilnic</label>
+          <input type="radio" name="cantitateCarneSaptamana" th:field="*{cantitateCarneSaptamana}" value="1" required />
+          <label>La 2 - 3 zile</label>
+          <input type="radio" name="cantitateCarneSaptamana" th:field="*{cantitateCarneSaptamana}" value="2" />
+          <label>O data</label>
+          <input type="radio" name="cantitateCarneSaptamana" th:field="*{cantitateCarneSaptamana}" value="3" />
+          <label>Deloc</label>
+          <input type="radio" name="cantitateCarneSaptamana" th:field="*{cantitateCarneSaptamana}" value="4" />
+        </div>
+        <div>
+          <label>29. Cate oua consumati pe saptamana?</label>
+          <br />
+          <label>1</label>
+          <input type="radio" name="cantitateOua" th:field="*{cantitateOua}" value="1" required />
+          <label>1 - 3</label>
+          <input type="radio" name="cantitateOua" th:field="*{cantitateOua}" value="2" />
+          <label>Mai mult de 3 </label>
+          <input type="radio" name="cantitateOua" th:field="*{cantitateOua}" value="2" />
+        </div>
+        <div>
+          <label>30. Consumati alimente foarte sarate?</label>
+          <br />
+          <label>Da</label>
+          <input type="radio" name="sare" th:field="*{sare}" value="Da" required />
+          <label>Nu</label>
+          <input type="radio" name="sare" th:field="*{sare}" value="Nu" />
+        </div>
+        <div>
+          <label>31. Cate lingurite de sare consumati pe zi?</label>
+          <br />
+          <label>Un sfert de lingurita</label>
+          <input type="radio" name="cantitateSare" th:field="*{cantitateSare}" value="1" required />
+          <label>Jumatate de lingurita</label>
+          <input type="radio" name="cantitateSare" th:field="*{cantitateSare}" value="2" />
+          <label>1 lingurita</label>
+          <input type="radio" name="cantitateSare" th:field="*{cantitateSare}" value="3" />
+          <label>Mai mult de 1 lingurita</label>
+          <input type="radio" name="cantitateSare" th:field="*{cantitateSare}" value="4" />
+        </div>
+        <div>
+          <label>32. Cate felii de paine consumati zilnic?</label>
+          <br />
+          <label> nu consum</label>
+          <input type="radio" name="cantitatePaine" th:field="*{cantitatePaine}" value="0" required />
+          <label>1 felie</label>
+          <input type="radio" name="cantitatePaine" th:field="*{cantitatePaine}" value="1" />
+          <label>3 - 4 felii</label>
+          <input type="radio" name="cantitatePaine" th:field="*{cantitatePaine}" value="2" />
+          <label>5 - 10 felie</label>
+          <input type="radio" name="cantitatePaine" th:field="*{cantitatePaine}" value="3" />
+          <label>1 KG</label>
+          <input type="radio" name="cantitatePaine" th:field="*{cantitatePaine}" value="4" />
+        </div>
+      </div>
+      <button type="submit">Solicita interpretare</button>
+    </form>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

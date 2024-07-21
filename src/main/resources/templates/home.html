@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}" />
+  </head>
+  <body>
+    <div id="navbar">
+      <a
+        href="#top"
+        id="navLogin"
+        sec:authorize="isAuthenticated()"
+        th:href="@{/logout}"
+        >Delogare</a
+      >
+      <a href="#bottom">Activitati</a>
+      <a href="#middle">Despre Proiect</a>
+      <a href="#top">Acasă</a>
+    </div>
+    <div class="top-container" id="top">
+      <div class="continut" id="continut">
+        <div class="titlu">
+          <h1 class="titlu-principal">Healthy Kidney</h1>
+          <br />
+          <p class="bun-venit">
+            Bun venit
+            <span class="nume-user" sec:authentication="principal.username"
+              >User</span
+            >
+          </p>
+        </div>
+        <div class="imagini">
+          <div class="float-1">
+            <img
+              class="hoverImages"
+              src="../img/digital-tablet-surrounded-by-medical-equipment-alarm-clock-with-succulent-plant-green-backdrop.jpg"
+              alt="picture"
+            />
+            <p>Totul simplu și digitalizat</p>
+          </div>
+          <div class="float-2">
+            <img
+              class="hoverImages"
+              src="../img/agent-filling-form-health-insurance-with-patient.jpg"
+              alt="picture"
+            />
+            <p>Completează formularul rapid și</p>
+            <p>primește un răspuns</p>
+          </div>
+          <div class="float-3">
+            <img
+              class="hoverImages"
+              src="../img/buddha-bowl-dish-with-vegetables-legumes-top-view.jpg"
+              alt="picture"
+              width="300"
+              height="300"
+            />
+            <p>Caută rețete și soluții pentru tine</p>
+          </div>
+        </div>
+      </div>
+      <div class="down-arrow">
+        <a href="#middle">
+          <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </div>
+    <div class="middle-container" id="middle">
+      <h1 class="despre">Despre proiect</h1>
+      <img class="hoverImages" src="./img/imgDespre.jpg" alt="picture" />
+      <p class="descriere">
+        Numele meu este Alexandru si in anul 2017 am decis sa imi dedic timpul
+        unui studiu care analiza fiziopatologia litiazei renale.
+        In urma studiului am observat anumite comportamente alimentare care
+        predispun la aparitia bolii si la recidiva acesteia.
+        Aceasta aplicatie va ofera un formular de evaluare nutritionala care
+        va poate ajuta la corectarea stilului de viata pentru a prevenii
+        aparitia acestei patologii.
+         .
+      </p>
+
+      <div class="down-arrow">
+        <a href="#bottom">
+          <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </div>
+    <div class="bottom-container" id="bottom">
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1>Activitati</h1>
+      <div class="elemente-activitati">
+        <a class="link-activitati"   th:href="@{/formular}"
+          ><img class="hoverImages" src="./img/imgFormular.webp" alt="picture"
+        /></a>
+        <a class="link-activitati"  th:href="@{/formular}"
+          ><p>Formular de evaluare nutritionala</p></a
+        >
+      </div>
+
+      <div class="footer">
+        <hr />
+        <footer>
+          <a href="">©️Copywrite Gospodaru Alexandru</a>
+          <a href="https://www.freepik.com/">Images: www.freepik.com/</a>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

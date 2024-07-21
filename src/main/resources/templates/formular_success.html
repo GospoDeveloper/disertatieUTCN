@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleFormular.css}" />
+    <title>Added succesfully</title>
+</head>
+<body>
+<!-- navigation bar menu -->
+<div id="navbar">
+    <a
+            id="navLogin"
+            sec:authorize="isAuthenticated()"
+            th:href="@{/logout}"
+    >Delogare</a
+    >
+    <a id="navHome" href="/"  th:href="@{/}">Acasă</a>
+</div>
+
+<h1>Formular trimis cu succes !</h1>
+
+<div class="interpretare">
+<p class="pRezultate">Rezultat:  <span th:text="${rezultat}"></span></p>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>

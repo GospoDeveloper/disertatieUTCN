@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "GFS Didot", serif;
+}
+
+/* css stilizare corp principal */
+body {
+  background-image: url(/img/imgBackground4.jpg);
+
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navbar {
+  overflow: hidden;
+  background-color: teal;
+}
+
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* stilizare formular */
+.formular-nutritional {
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  justify-content: center;
+  gap: 50px;
+}
+
+.date-demografice,
+.date-diagnostic,
+.date-consum-apa,
+.date-alimentatie {
+  border: 5px solid teal;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+}
+
+.titlu-subdivizie {
+  font-size: 30px;
+  font-weight: bold;
+  align-self: center;
+}
+
+/* stilizare input box */
+.input-text {
+  border: 2px solid teal;
+  width: 200px;
+  height: 30px;
+}
+
+input {
+  border: 1px solid teal;
+  width: 15px;
+  height: 15px;
+}
+
+input:hover {
+  border-color: green;
+}
+
+.titlu {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 40px;
+}
+
+/* stilizare button */
+button {
+  width: 200px;
+  height: 40px;
+  margin-bottom: 50px;
+  align-self: center;
+  background-color: teal;
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border: teal;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+button:hover {
+  background-color: #04aa6d;
+  cursor: pointer;
+  border: #04aa6d;
+}
+
+/* pagina de afisare rezultate */
+.pRezultate{
+    font-size:25px;
+    padding:10px;
+}
+
+.interpretare{
+    display:flex;
+    flex-direction:column;
+    width:50%;
+    border-style:solid;
+    border-width:2px;
+    border-radius:25px;
+}

@@ -3,6 +3,9 @@ package com.example.gospo.HealthyKidneyApp.service;
 import com.example.gospo.HealthyKidneyApp.model.User;
 import com.example.gospo.HealthyKidneyApp.model.UserPrincipal;
 import com.example.gospo.HealthyKidneyApp.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,13 +30,24 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private HttpServletResponse response;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = repository.findByEmail(email);
-        if(user == null){
+        if(user == null) {
             System.out.println("User 404");
             throw  new UsernameNotFoundException("User 404");
         }
+        var form = user.getForm();
+
+        request.getSession().setAttribute("userform", form);
+        response.addCookie(new Cookie("logged-in", "true"));
+
         return new UserPrincipal(user);
     }
 

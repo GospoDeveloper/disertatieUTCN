@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 /* Clasa user modelul de date si modul cum se creeaza tabelele in postgresql utilizand spring jpa */
+
+/*asfasfa */
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html
   lang="en"
@@ -24,7 +26,7 @@
       >
       <a href="#bottom">Activitati</a>
       <a href="#middle">Despre Proiect</a>
-      <a href="#top">Acasă</a>
+      <a href="#top">Acasa</a>
     </div>
     <div class="top-container" id="top">
       <div class="continut" id="continut">
@@ -45,7 +47,7 @@
               src="../img/digital-tablet-surrounded-by-medical-equipment-alarm-clock-with-succulent-plant-green-backdrop.jpg"
               alt="picture"
             />
-            <p>Totul simplu și digitalizat</p>
+            <p>Totul simplu si digitalizat</p>
           </div>
           <div class="float-2">
             <img
@@ -53,8 +55,8 @@
               src="../img/agent-filling-form-health-insurance-with-patient.jpg"
               alt="picture"
             />
-            <p>Completează formularul rapid și</p>
-            <p>primește un răspuns</p>
+            <p>Completeaza formularul rapid si</p>
+            <p>primeste un raspuns</p>
           </div>
           <div class="float-3">
             <img
@@ -64,7 +66,7 @@
               width="300"
               height="300"
             />
-            <p>Caută rețete și soluții pentru tine</p>
+            <p>Cauta retete si solutii pentru tine</p>
           </div>
         </div>
       </div>
@@ -112,12 +114,69 @@
       <div class="footer">
         <hr />
         <footer>
-          <a href="">©️Copywrite Gospodaru Alexandru</a>
+          <a href="">�Copywrite Gospodaru Alexandru</a>
           <a href="https://www.freepik.com/">Images: www.freepik.com/</a>
         </footer>
       </div>
     </div>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/script.js"></script>
+    <script th:inline="javascript">
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function eraseCookie(name) {
+        document.cookie = name+'=; Max-Age=-99999999;';
+      }
+
+
+      window.onload = function() {
+
+        var session = [[${session}]];
+        let userform = session.userform;
+        let loggedIn = getCookie("logged-in");
+
+        const isEmpty = Object.values(userform).every(x => x === null || x === undefined || x === '');
+        sleep(500).then(() => {
+          if(!isEmpty && loggedIn) {
+            swal({
+              title: "Ai simptome noi de la ultima vizita?",
+              // text: "Ai simptome noi de la completarea ultimului formular?",
+              buttons: ["Nu", "Da"]
+            })
+                    .then((confirm) => {
+                      if (confirm) {
+                           // swal("Doresti sa refaci formularul ?", {
+                           //   icon: "success",
+                           // }).then((confirm) => {
+                              if(confirm) {
+                                eraseCookie("logged-in");
+                                window.location = "http://localhost:8080/formular-nou";
+                              }
+                           // });
+                      }
+                    });
+        }});
+
+      };
+
+  </script>
   </body>
 </html>

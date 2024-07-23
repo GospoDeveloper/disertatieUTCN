@@ -37,6 +37,19 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/formular-nou")
+    public String formularNou(Model model, Principal principal){
+        User currentUser = userRepository.findByEmail(principal.getName());
+        FormularNutritional formular = formularNutritionalService.getFormularByUserId(currentUser.getId());
+
+        var newFormular = new FormularNutritional();
+        newFormular.setId(formular.getId());
+        model.addAttribute("formular", newFormular);
+
+        return "formular";
+    }
+
+
     @GetMapping("/formular")
     public String formular( Model model, Principal principal){
 
@@ -59,7 +72,6 @@ public class HomeController {
 
         //adauga formularul la model
         model.addAttribute("formular", formular);
-
         return "formular";
     }
 

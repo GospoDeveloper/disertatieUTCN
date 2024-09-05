@@ -25,20 +25,16 @@ Interacționează cu UserRepository.
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
-
-
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
     @Override
     public User save(UserRegistrationDto userRegistrationDto) {
         User user = new User(userRegistrationDto.getFirstName(), userRegistrationDto.getLastName(), userRegistrationDto.getEmail(), passwordEncoder.encode(userRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")),new FormularNutritional());
         return userRepository.save(user);
     }
-
     public Long getUserIdByUsername(String username) {
         //
         //Implementare logica pentru a prelua ID-ul utilizatorului după numele de utilizator din arhiva UserRepository
@@ -49,7 +45,6 @@ public class UserServiceImpl implements UserService{
             return null;
         }
     }
-
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {

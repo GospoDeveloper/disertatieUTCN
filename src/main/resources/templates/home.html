@@ -119,14 +119,12 @@
         </footer>
       </div>
     </div>
-
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/script.js"></script>
     <script th:inline="javascript">
       function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
-
       function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');
@@ -141,12 +139,9 @@
         }
         return "";
       }
-
       function eraseCookie(name) {
         document.cookie = name+'=; Max-Age=-99999999;';
       }
-
-
       window.onload = function() {
 
         var session = [[${session}]];
@@ -174,7 +169,6 @@
                       }
                     });
         }});
-
       };
 
   </script>
